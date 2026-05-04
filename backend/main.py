@@ -87,25 +87,21 @@ def create_post(post: PostCreate, user: dict = Depends(verify_firebase_token)):
         )
         conn.commit()
 
-    return {"ok": True, "message": "Đăng bài thành công", "author": email}
+    return {"ok": True, "message": "Đăng ghi chú thành công", "author": email}
 
 @app.delete("/posts/{post_id}")
 def delete_post(post_id: int, user: dict = Depends(verify_firebase_token)):
-    # Phải kết nối đúng file note.db
     with sqlite3.connect("note.db", check_same_thread=False) as conn:
         cursor = conn.cursor()
         
-        # Kiểm tra bài viết có tồn tại không
+    
         cursor.execute("SELECT author_email FROM posts WHERE id = ?", (post_id,))
         post = cursor.fetchone()
         
         if not post:
             raise HTTPException(status_code=404, detail="Không tìm thấy bài viết")
 
-        # (Tùy chọn) Chỉ cho phép người sở hữu xoá bài của chính họ
-        # if post[0] != user.get("email"):
-        #     raise HTTPException(status_code=403, detail="Bạn không có quyền xoá bài này")
-
+    
         cursor.execute("DELETE FROM posts WHERE id = ?", (post_id,))
         conn.commit()
         

@@ -1,4 +1,4 @@
-// Cấu hình Firebase
+// Cấu hình Firebase[cite: 2]
 const firebaseConfig = {
     apiKey: "AIzaSyA6vXJXHjXKreeSotM--yRCvhG5r_AIubQ",
     authDomain: "note-app-a56e5.firebaseapp.com",
@@ -8,7 +8,7 @@ const firebaseConfig = {
     appId: "1:452927050800:web:33558d969317a4625189f5"
 };
 
-// Khởi tạo Firebase
+// Khởi tạo Firebase[cite: 2]
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -73,6 +73,12 @@ async function deletePost(id) {
 
 // Tải danh sách bài viết[cite: 2]
 async function loadPosts() {
+    // KIỂM TRA: Nếu chưa đăng nhập thì không gọi API và xóa trắng danh sách[cite: 2]
+    if (!auth.currentUser) {
+        listDiv.innerHTML = "<p style='text-align: center;'>Vui lòng đăng nhập để xem ghi chú của bạn.</p>";
+        return;
+    }
+
     try {
         const res = await fetch(`${API_URL}/posts`);
         if (!res.ok) throw new Error("Không thể tải ghi chú");
@@ -130,18 +136,25 @@ logoutBtn.addEventListener("click", () => {
 // Lắng nghe trạng thái đăng nhập[cite: 2]
 auth.onAuthStateChanged((user) => {
     if (user) {
+        // Giao diện khi ĐÃ đăng nhập[cite: 2]
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
         openModalBtn.style.display = "inline-block";
         userEmailSpan.style.display = "inline-block";
         userEmailSpan.textContent = user.email;
+        
+        // Chỉ tải dữ liệu khi đã xác thực[cite: 2]
+        loadPosts(); 
     } else {
+        // Giao diện khi CHƯA đăng nhập hoặc ĐÃ đăng xuất[cite: 2]
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
         openModalBtn.style.display = "none";
         userEmailSpan.style.display = "none";
+        
+        // Xóa ghi chú khỏi màn hình ngay lập tức[cite: 2]
+        listDiv.innerHTML = "<p style='text-align: center;'>Đăng nhập để bắt đầu viết ghi chú.</p>";
     }
-    loadPosts();
 });
 
 // Đăng bài mới[cite: 2]
