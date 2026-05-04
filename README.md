@@ -37,12 +37,6 @@ Dự án này là một web ghi chú cho phép người dùng thực hiện các
 pip install -r requirements.txt
 ```
 
-(Cài Firebase Tools nếu muốn deploy)
-
-```bash
-npm install -g firebase-tools
-```
-
 ---
 
 ### 2. Chạy Backend
@@ -58,11 +52,6 @@ Khởi động server:
 ```bash
 py -m uvicorn main:app --reload
 ```
-
-**Lưu ý:**
-
-* Đảm bảo file `serviceAccountKey.json` được đặt trong thư mục `config` (cùng cấp với `backend`) để server có thể kết nối Firebase.
-
 ---
 
 ### 3. Chạy Frontend
@@ -75,4 +64,6 @@ frontend/index.html
 ```
 
 * Chọn **Open with Live Server**
+
+### 4. Video demo
 
