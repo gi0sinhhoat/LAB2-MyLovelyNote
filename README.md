@@ -20,7 +20,7 @@ Dự án này là một web ghi chú cho phép người dùng thực hiện các
 ### Công nghệ sử dụng
 
 * **Backend:** FastAPI (Python) + SQLite
-* **Frontend:** HTML/CSS (giao diện Glassmorphism) + JavaScript thuần
+* **Frontend:** HTML/CSS  + JavaScript 
 
 ---
 
@@ -31,7 +31,6 @@ Dự án này là một web ghi chú cho phép người dùng thực hiện các
 **Yêu cầu hệ thống:**
 
 * Python 3.10+
-* Node.js (để sử dụng npm)
 
 **Các bước:**
 
