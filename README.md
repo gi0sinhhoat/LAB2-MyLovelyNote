@@ -1,4 +1,6 @@
 
+
+
 # LAB2
 
 ## Giới thiệu dự án
@@ -66,5 +68,7 @@ frontend/index.html
 * Chọn **Open with Live Server**
 
 ### 4. Video demo
-[Watch video](video.mp4)
+https://youtu.be/c_IKZeE-cDM
+
+
 
